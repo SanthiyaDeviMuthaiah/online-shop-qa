@@ -1,0 +1,57 @@
+# Online Shop QA Automation Suite
+
+Automated tests for the demo e-commerce site [SauceDemo](https://www.saucedemo.com/).
+The project covers login and product page behavior using Selenium, TestNG, and Cucumber (BDD).
+
+## Tech stack
+
+- Java 17
+- Maven
+- Selenium WebDriver 4.25.0
+- TestNG 7.10.2
+- Cucumber 7.20.1 (Gherkin feature files)
+- Page Object Model
+
+## Project structure
+
+
+## Test coverage
+
+| Feature | Scenarios | Tags |
+|---|---|---|
+| Login | Valid login, locked out user, invalid credentials (outline with 4 examples) | `@smoke`, `@negative`, `@regression` |
+| Products | Item count, page title, adding a product updates the cart badge | `@smoke`, `@regression` |
+
+## Prerequisites
+
+- JDK 17 or newer
+- Maven 3.9 or newer
+- Google Chrome (Selenium downloads a matching ChromeDriver automatically)
+
+## How to run
+
+Run all tests:
+
+```bash
+mvn clean test
+```
+
+Run only smoke tests:
+
+```bash
+mvn test -Dcucumber.filter.tags="@smoke"
+```
+
+After the run, open `reports/cucumber.html` in a browser to see the results.
+
+## Configuration
+
+Edit `src/test/resources/config.properties` to change the base URL, test users, or timing:
+
+- `slow.millis`: pause before each step, in milliseconds (set to `0` for fast runs)
+- `hold.millis`: time the browser stays open after each scenario (set to `0` for fast runs)
+
+## Known notes
+
+- The console shows `CdpVersionFinder` warnings about the Chrome DevTools version. They don't affect results.
+- Each full run takes about 2 minutes with the default pause settings.
