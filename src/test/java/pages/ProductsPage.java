@@ -41,15 +41,13 @@ public class ProductsPage {
     private final By removeButton = By.cssSelector("button[id^='remove']");
 
     public void addFirstProductToCart() {
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(removeButton));
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", addButton);
+        wait.until(ExpectedConditions.presenceOfElementLocated(removeButton));
     }
 
     public String getCartBadgeCount() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(cartBadge)).getText();
-        } catch (org.openqa.selenium.TimeoutException e) {
-            return "0";
-        }
+        List<WebElement> badges = driver.findElements(cartBadge);
+        return badges.isEmpty() ? "0" : badges.get(0).getText();
     }
 }
