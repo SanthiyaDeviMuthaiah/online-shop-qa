@@ -1,0 +1,174 @@
+{
+  "info": {
+    "_postman_id": "b6005ac7-b3cf-47da-ac77-07c25e489192",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30711978"
+  },
+  "item": [
+    {
+      "name": "Get post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\r",
+              "pm.test(\"Response is JSON\", () => pm.response.to.be.json);\r",
+              "pm.test(\"Post 1 has the expected id and userId\", () => {\r",
+              "    const body = pm.response.json();\r",
+              "    pm.expect(body.id).to.eql(1);\r",
+              "    pm.expect(body.userId).to.eql(1);\r",
+              "});\r",
+              "pm.test(\"Response has title and body fields\", () => {\r",
+              "    const body = pm.response.json();\r",
+              "    pm.expect(body).to.have.property(\"title\");\r",
+              "    pm.expect(body).to.have.property(\"body\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 201 Created\", () => pm.response.to.have.status(201));\r",
+              "pm.test(\"Server returns an id\", () => {\r",
+              "    pm.expect(pm.response.json().id).to.be.a(\"number\");\r",
+              "});\r",
+              "pm.test(\"Returned title matches what was sent\", () => {\r",
+              "    pm.expect(pm.response.json().title).to.eql(\"Test title\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Test title\",\r\n  \"body\": \"Test body\",\r\n  \"userId\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/posts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\r",
+              "pm.test(\"Returned title is the updated value\", () => {\r",
+              "    pm.expect(pm.response.json().title).to.eql(\"Test title\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Test title\",\r\n  \"body\": \"Test body\",\r\n  \"userId\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\r",
+              "pm.test(\"Response body is an empty object\", () => {\r",
+              "    pm.expect(pm.response.json()).to.eql({});\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
