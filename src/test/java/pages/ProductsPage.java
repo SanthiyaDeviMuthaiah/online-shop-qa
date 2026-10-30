@@ -37,8 +37,12 @@ public class ProductsPage {
         return items.size();
     }
 
+    private final By addToCartButton = By.cssSelector("button[id^='add-to-cart']");
+    private final By removeButton = By.cssSelector("button[id^='remove']");
+
     public void addFirstProductToCart() {
-        wait.until(ExpectedConditions.elementToBeClickable(firstAddButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(removeButton));
     }
 
     public String getCartBadgeCount() {
