@@ -55,3 +55,17 @@ Edit `src/test/resources/config.properties` to change the base URL, test users, 
 
 - The console shows `CdpVersionFinder` warnings about the Chrome DevTools version. They don't affect results.
 - Each full run takes about 2 minutes with the default pause settings.
+
+## AI usage in test design
+
+AI assistants were used to draft and review test ideas during the project. Every generated test case was checked by hand against the SauceDemo site before it was kept.
+
+| Outcome | Example |
+|---|---|
+| Kept as written | Locked-out user error message (TC-LOGIN-02) |
+| Kept, then changed | Invalid credentials outline: the first draft used a generic "invalid login" message; the exact SauceDemo text was substituted after checking the site |
+| Rejected | A draft test that expected a confirmation popup after login, which SauceDemo does not show |
+
+**What AI helped with:** drafting the Gherkin scenarios, suggesting boundary and partition cases for the login form, and writing the first version of page object locators.
+
+**What was checked by hand:** every expected error message, every locator (confirmed in Chrome DevTools), and every test data value. AI output was not trusted without verification, since it produced wrong expected values in several drafts.
