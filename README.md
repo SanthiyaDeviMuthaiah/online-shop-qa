@@ -69,3 +69,11 @@ AI assistants were used to draft and review test ideas during the project. Every
 **What AI helped with:** drafting the Gherkin scenarios, suggesting boundary and partition cases for the login form, and writing the first version of page object locators.
 
 **What was checked by hand:** every expected error message, every locator (confirmed in Chrome DevTools), and every test data value. AI output was not trusted without verification, since it produced wrong expected values in several drafts.
+
+## API tests
+
+Postman collection in `api-tests/JSONPlaceholder.postman_collection.json`. It covers GET, POST, PUT, and DELETE against the public JSONPlaceholder API, with status code and response body checks. Import the file into Postman and run it with the `baseUrl` environment variable set to `https://jsonplaceholder.typicode.com`.
+
+## Database
+
+`database/Schema.sql` creates and fills test tables for users, products, orders, and order items. `database/queries.sql` contains validation queries that check the data, using joins, aggregates, GROUP BY, HAVING, and a LEFT JOIN. Run the schema first, then the queries, in any SQLite tool. The local `.db` file is excluded from Git.
