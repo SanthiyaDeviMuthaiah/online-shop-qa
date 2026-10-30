@@ -42,7 +42,10 @@ public class ProductsPage {
     }
 
     public String getCartBadgeCount() {
-        List<WebElement> badges = driver.findElements(cartBadge);
-        return badges.isEmpty() ? "0" : badges.get(0).getText();
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(cartBadge)).getText();
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return "0";
+        }
     }
 }
